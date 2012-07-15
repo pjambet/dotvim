@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/pierre/Documents/prog/rspec-book/code/automated_browser/01/spec/controllers'
+let g:netrw_dirhist_2='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6'
+let g:netrw_dirhist_3='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6/lib'
+let g:netrw_dirhist_4='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6/lib/active_record'
+let g:netrw_dirhist_5='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6/lib/active_record/attribute_methods'
+let g:netrw_dirhist_6='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6'
+let g:netrw_dirhist_7='/Users/pierre/.rvm/gems/ruby-1.9.2-head/gems/activerecord-3.2.6/lib/active_record'
