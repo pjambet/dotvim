@@ -11,3 +11,5 @@
     cd ~/.vim
     git submodule init
     git submodule update
+
+Technique stolen from http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
