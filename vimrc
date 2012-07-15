@@ -5,6 +5,8 @@ au FocusLost * :wa
 " " vim:set ts=2 sts=2 sw=2 expandtab:
 
 call pathogen#runtime_append_all_bundles()
+" " Pierre's customisation
+call pathogen#helptags()
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " " BASIC EDITING CONFIGURATION
