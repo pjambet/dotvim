@@ -5,8 +5,6 @@
 " " vim:set ts=2 sts=2 sw=2 expandtab:
 
 call pathogen#runtime_append_all_bundles()
-" " Pierre's customisation
-call pathogen#helptags()
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " " BASIC EDITING CONFIGURATION
@@ -398,6 +396,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pierre jambet custom bindings :
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+call pathogen#helptags()
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
