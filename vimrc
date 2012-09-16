@@ -1,6 +1,3 @@
-" " My own settings
-:au FocusLost * silent! wa
-
 " " This is Gary Bernhardt's .vimrc file
 " " vim:set ts=2 sts=2 sw=2 expandtab:
 
@@ -441,4 +438,16 @@ endfunction
 
 nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+
+
+set wildignore+=*.o,*.obj,.git,node_modules
+
+" Highlight text over 80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+" An other option is to set the colorcolumn
+" set colorcolumn=80
+
+" Save on focus lost
+:au FocusLost * silent! wa
 
