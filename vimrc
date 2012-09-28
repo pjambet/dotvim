@@ -451,3 +451,5 @@ match OverLength /\%81v.\+/
 " Save on focus lost
 :au FocusLost * silent! wa
 
+set autoread
+
