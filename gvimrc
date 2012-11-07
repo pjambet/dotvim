@@ -5,3 +5,5 @@ if has("gui_mac") || has("gui_macvim")
   map <silent><D-t> :FufFile **/<CR>
 endif
 
+:macm Window.Select\ Previous\ Tab  key=<D-S-Left>
+:macm Window.Select\ Next\ Tab	   key=<D-S-Right>

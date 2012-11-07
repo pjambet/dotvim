@@ -453,3 +453,29 @@ match OverLength /\%81v.\+/
 
 set autoread
 
+autocmd BufWritePost *
+      \ if filereadable('tags') |
+      \   call system('ctags -a '.expand('%')) |
+      \ endif
+
+" Switch hash syntax to 1.9
+lommand! HashSyntax,:%s/:\([^ ]*\)\(\s*\)=>/\1:/g
+
+function! HashSyntax()
+    let name = input("Variable name: ")
+    if name == ''
+        return
+    endif
+    " Enter visual mode (not sure why this is needed since we're already in
+    " visual mode anyway)
+    normal! gv
+
+    " Replace selected text with the variable name
+    exec "normal c" . name
+    " Define the variable on the line above
+    exec "normal! O" . name . " = "
+    " Paste the original selected text to be the variable value
+    normal! $p
+endfunction
+command! HashSyntax :call HashSyntax()<cr>
+
