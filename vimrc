@@ -396,15 +396,20 @@ endif
 
 call pathogen#helptags()
 
+function! ToggleChars()
+
+  exec "set list!"
+endfunction
+
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+nmap <leader>l :call ToggleChars()<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<
+set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<,nbsp:•
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59
+highlight SpecialKey guifg=white guibg=#cc0000
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -459,23 +464,83 @@ autocmd BufWritePost *
       \ endif
 
 " Switch hash syntax to 1.9
-lommand! HashSyntax,:%s/:\([^ ]*\)\(\s*\)=>/\1:/g
+command! HashSyntax :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
 
-function! HashSyntax()
-    let name = input("Variable name: ")
-    if name == ''
-        return
+" function! HashSyntax()
+"     let name = input("Variable name: ")
+"     if name == ''
+"         return
+"     endif
+"     " Enter visual mode (not sure why this is needed since we're already in
+"     " visual mode anyway)
+"     normal! gv
+
+"     " Replace selected text with the variable name
+"     exec "normal c" . name
+"     " Define the variable on the line above
+"     exec "normal! O" . name . " = "
+"     " Paste the original selected text to be the variable value
+"     normal! $p
+" endfunction
+" command! HashSyntax :call HashSyntax()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Test-running stuff
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunCurrentTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+
+    if match(expand('%'), '\.feature$') != -1
+      call SetTestRunner("!cucumber")
+      exec g:bjo_test_runner g:bjo_test_file
+    elseif match(expand('%'), '_spec\.rb$') != -1
+      call SetTestRunner("!bundle exec rspec")
+      exec g:bjo_test_runner g:bjo_test_file
+    else
+      call SetTestRunner("!ruby -Itest")
+      exec g:bjo_test_runner g:bjo_test_file
     endif
-    " Enter visual mode (not sure why this is needed since we're already in
-    " visual mode anyway)
-    normal! gv
-
-    " Replace selected text with the variable name
-    exec "normal c" . name
-    " Define the variable on the line above
-    exec "normal! O" . name . " = "
-    " Paste the original selected text to be the variable value
-    normal! $p
+  else
+    exec g:bjo_test_runner g:bjo_test_file
+  endif
 endfunction
-command! HashSyntax :call HashSyntax()<cr>
+
+function! SetTestRunner(runner)
+  let g:bjo_test_runner=a:runner
+endfunction
+
+function! RunCurrentLineInTest()
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFileWithLine()
+  end
+
+  exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+endfunction
+
+function! SetTestFile()
+  let g:bjo_test_file=@%
+endfunction
+
+function! SetTestFileWithLine()
+  let g:bjo_test_file=@%
+  let g:bjo_test_file_line=line(".")
+endfunction
+
+function! CorrectTestRunner()
+  if match(expand('%'), '\.feature$') != -1
+    return "cucumber"
+  elseif match(expand('%'), '_spec\.rb$') != -1
+    return "rspec"
+  else
+    return "ruby"
+  endif
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader>t :call RunCurrentTest()<CR>
+
+map <leader>csc :%s/;/<cr>
 
