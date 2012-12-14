@@ -10,6 +10,7 @@
 [submodule "bundle/vim-coffee-script"]
 	path = bundle/vim-coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
+  ignore = dirty
 [submodule "bundle/vim-commentary"]
 	path = bundle/vim-commentary
 	url = git://github.com/tpope/vim-commentary.git
@@ -46,6 +47,7 @@
 [submodule "bundle/VimClojure"]
 	path = bundle/VimClojure
 	url = https://github.com/vim-scripts/VimClojure.git
+  ignore = dirty
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = git://github.com/nathanaelkane/vim-indent-guides.git
@@ -55,12 +57,14 @@
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
 	url = git://github.com/tsaleh/vim-matchit.git
+  ignore = dirty
 [submodule "bundle/vim-rspec"]
 	path = bundle/vim-rspec
 	url = git://github.com/skwp/vim-rspec.git
 [submodule "bundle/vim-multiedit"]
 	path = bundle/vim-multiedit
 	url = git://github.com/felixr/vim-multiedit.git
+  ignore = dirty
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
@@ -79,6 +83,7 @@
 [submodule "bundle/ropevim"]
 	path = bundle/ropevim
 	url = https://github.com/sontek/rope-vim.git
+  ignore = dirty
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
