@@ -99,9 +99,13 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set t_Co=256 " 256 colors
-:set background=dark
-:color twilight
+" :set t_Co=256 " 256 colors
+" :set background=dark
+" :color twilight
+syntax enable
+set background=dark
+colorscheme solarized
+
 ":color grb256
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -445,7 +449,7 @@ nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
 
 
-set wildignore+=*.o,*.obj,.git,node_modules
+set wildignore+=*.o,*.obj,.git,node_modules,venv
 
 " Highlight text over 80
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -458,10 +462,10 @@ match OverLength /\%81v.\+/
 
 set autoread
 
-autocmd BufWritePost *
-      \ if filereadable('tags') |
-      \   call system('ctags -a '.expand('%')) |
-      \ endif
+" autocmd BufWritePost *
+"       \ if filereadable('tags') |
+"       \   call system('ctags -a '.expand('%')) |
+"       \ endif
 
 " Switch hash syntax to 1.9
 command! HashSyntax :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
@@ -487,60 +491,16 @@ command! HashSyntax :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Test-running stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunCurrentTest()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
 
-    if match(expand('%'), '\.feature$') != -1
-      call SetTestRunner("!cucumber")
-      exec g:bjo_test_runner g:bjo_test_file
-    elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bundle exec rspec")
-      exec g:bjo_test_runner g:bjo_test_file
-    else
-      call SetTestRunner("!ruby -Itest")
-      exec g:bjo_test_runner g:bjo_test_file
-    endif
-  else
-    exec g:bjo_test_runner g:bjo_test_file
-  endif
-endfunction
-
-function! SetTestRunner(runner)
-  let g:bjo_test_runner=a:runner
-endfunction
-
-function! RunCurrentLineInTest()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFileWithLine()
-  end
-
-  exec "!rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
-endfunction
-
-function! SetTestFile()
-  let g:bjo_test_file=@%
-endfunction
-
-function! SetTestFileWithLine()
-  let g:bjo_test_file=@%
-  let g:bjo_test_file_line=line(".")
-endfunction
-
-function! CorrectTestRunner()
-  if match(expand('%'), '\.feature$') != -1
-    return "cucumber"
-  elseif match(expand('%'), '_spec\.rb$') != -1
-    return "rspec"
-  else
-    return "ruby"
-  endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <Leader>t :call RunCurrentTest()<CR>
+map <Leader>t :RunSpec<CR>
 
 map <leader>csc :%s/;/<cr>
+map <leader>g :GundoToggle<CR>
+map <leader>d <Plug>TaskList
+let g:pep8_map='<leader>8'
+map <leader>k :RopeGotoDefinition<CR>
+map <leader>j :RopeRename<CR>
+nmap <leader>a <Esc>:Ack!
+map <leader>sv :vsplit<CR>
+map <leader>sh :split<CR>
 
