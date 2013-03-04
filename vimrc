@@ -264,8 +264,8 @@ map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gl :CtrlP app/lib<cr>
-map <leader>gp :CtrlP app/public<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gp :CtrlP public<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>f :CtrlP<cr>
 map <leader>F :CtrlP %%<cr>
