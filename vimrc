@@ -80,7 +80,7 @@ augroup vimrcEx
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
   " Indent p tags
-  autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+  " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 
   " Don't syntax highlight markdown because it's often wrong
   autocmd! FileType mkd setlocal syn=off
@@ -307,6 +307,7 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
+map <leader>sl :RunSpecLine<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
@@ -449,7 +450,7 @@ nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
 nmap <silent> <leader>pw :call DoWindowSwap()<CR>
 
 
-set wildignore+=*.o,*.obj,.git,node_modules,venv
+set wildignore+=*.o,*.obj,.git,node_modules,venv,*.pyc
 
 " Highlight text over 80
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
@@ -504,3 +505,23 @@ nmap <leader>a <Esc>:Ack!
 map <leader>sv :vsplit<CR>
 map <leader>sh :split<CR>
 
+au BufRead,BufNewFile *.hamlc set ft=haml
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+" Automatically run flake8 upon save
+" autocmd BufWritePost *.py call Flake8()
+
+" Python mode settings
+let g:pymode_lint = 1
+let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
+
+let g:pymode_folding = 0
+let g:pymode_run = 1
+" Key for run python code
+let g:pymode_run_key = 'R'
