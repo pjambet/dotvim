@@ -1,9 +1,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://github.com/wincent/Command-T.git
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
 	url = git://github.com/tpope/vim-bundler.git
