@@ -1,7 +1,7 @@
 " " This is Gary Bernhardt's .vimrc file
 " " vim:set ts=2 sts=2 sw=2 expandtab:
 
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " " BASIC EDITING CONFIGURATION
@@ -516,7 +516,7 @@ sunmap e
 
 " Python mode settings
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
+let g:pymode_lint_checker = "pep8,mccabe"
 
 let g:pymode_folding = 0
 let g:pymode_run = 1
@@ -525,3 +525,5 @@ let g:pymode_run_key = 'R'
 
 " CtrlP (awesome!) settings
 let g:ctrlp_max_height = 20
+
+let g:gitgutter_enabled = 0
