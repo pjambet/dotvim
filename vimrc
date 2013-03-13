@@ -30,7 +30,7 @@ set switchbuf=useopen
 set numberwidth=5
 set showtabline=2
 set winwidth=79
-set shell=bash
+set shell=zsh
 " " Prevent Vim from clobbering the scrollback buffer. See
 " " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
@@ -71,10 +71,11 @@ augroup vimrcEx
     \ endif
 
   "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,scss,cucumber set ai sw=2 sts=2 ts=2 et
+  autocmd FileType python set sw=4 sts=4 ts=2 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
+  autocmd! BufRead,BufNewFile *.scss setfiletype scss
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -527,3 +528,5 @@ let g:pymode_run_key = 'R'
 let g:ctrlp_max_height = 20
 
 let g:gitgutter_enabled = 0
+
+autocmd InsertEnter,InsertLeave * set cul!
