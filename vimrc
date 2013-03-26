@@ -530,3 +530,4 @@ let g:ctrlp_max_height = 20
 
 let g:gitgutter_enabled = 0
 
+autocmd InsertEnter,InsertLeave * set cul!
