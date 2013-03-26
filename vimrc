@@ -102,6 +102,8 @@ augroup vimrcEx
   endif
 
   autocmd InsertEnter,InsertLeave * set cul!
+  au BufLeave,FocusLost * silent! wa
+  au BufRead,BufNewFile *.hamlc set ft=haml
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -460,7 +462,6 @@ match OverLength /\%81v.\+/
 " set colorcolumn=80
 
 " Save on focus lost
-:au BufLeave,FocusLost * silent! wa
 
 
 " autocmd BufWritePost *
@@ -498,13 +499,11 @@ map <Leader>t :RunSpec<CR>
 map <leader>csc :%s/;/<cr>
 map <leader>g :GundoToggle<CR>
 map <leader>d <Plug>TaskList
-let g:pep8_map='<leader>8'
 map <leader>k :RopeGotoDefinition<CR>
 map <leader>j :RopeRename<CR>
 map <leader>sv :vsplit<CR>
 map <leader>sh :split<CR>
 
-au BufRead,BufNewFile *.hamlc set ft=haml
 
 map <silent> w <Plug>CamelCaseMotion_w
 " map <silent> b <Plug>CamelCaseMotion_b
@@ -512,9 +511,6 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 " sunmap b
 sunmap e
-
-" Automatically run flake8 upon save
-" autocmd BufWritePost *.py call Flake8()
 
 " Python mode settings
 let g:pymode_lint = 1
@@ -530,4 +526,3 @@ let g:ctrlp_max_height = 20
 
 let g:gitgutter_enabled = 0
 
-autocmd InsertEnter,InsertLeave * set cul!
