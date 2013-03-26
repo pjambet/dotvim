@@ -102,3 +102,12 @@
 [submodule "bundle/vim-gutter"]
 	path = bundle/vim-gutter
 	url = git://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/closetag"]
+	path = bundle/closetag
+	url = git://github.com/vim-scripts/closetag.vim.git
+[submodule "bundle/xmledit"]
+	path = bundle/xmledit
+	url = https://github.com/sukima/xmledit.git
+[submodule "bundle/vim-mardown"]
+	path = bundle/vim-mardown
+	url = git://github.com/tpope/vim-markdown.git

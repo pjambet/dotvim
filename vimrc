@@ -72,7 +72,7 @@ augroup vimrcEx
 
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,scss,cucumber set ai sw=2 sts=2 ts=2 et
-  autocmd FileType python set sw=4 sts=4 ts=2 et
+  autocmd FileType python,php set sw=4 sts=4 ts=4 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass
   autocmd! BufRead,BufNewFile *.scss setfiletype scss
@@ -95,6 +95,13 @@ augroup vimrcEx
   autocmd BufWritePre * :%s/\s\+$//e
   autocmd User fugitive if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' | nnoremap <buffer> .. :edit %:h<CR> | endif
   autocmd BufReadPost fugitive://* set bufhidden=delete
+
+  " Source the vimrc file after saving it
+  if has("autocmd")
+    autocmd bufwritepost .vimrc source $MYVIMRC
+  endif
+
+  autocmd InsertEnter,InsertLeave * set cul!
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -397,7 +404,7 @@ endif
 " Pierre jambet custom bindings :
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call pathogen#helptags()
+" call pathogen#helptags()
 
 function! ToggleChars()
 
@@ -414,10 +421,6 @@ set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<,nbsp:•
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=white guibg=#cc0000
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
 
 " Bind a shortup to :edit $MYVIMRC
 nmap <leader>r :edit $MYVIMRC<CR>
@@ -457,9 +460,8 @@ match OverLength /\%81v.\+/
 " set colorcolumn=80
 
 " Save on focus lost
-:au FocusLost * silent! wa
+:au BufLeave,FocusLost * silent! wa
 
-set autoread
 
 " autocmd BufWritePost *
 "       \ if filereadable('tags') |
@@ -499,17 +501,16 @@ map <leader>d <Plug>TaskList
 let g:pep8_map='<leader>8'
 map <leader>k :RopeGotoDefinition<CR>
 map <leader>j :RopeRename<CR>
-nmap <leader>a <Esc>:Ack!
 map <leader>sv :vsplit<CR>
 map <leader>sh :split<CR>
 
 au BufRead,BufNewFile *.hamlc set ft=haml
 
 map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
-sunmap b
+" sunmap b
 sunmap e
 
 " Automatically run flake8 upon save
@@ -529,4 +530,3 @@ let g:ctrlp_max_height = 20
 
 let g:gitgutter_enabled = 0
 
-autocmd InsertEnter,InsertLeave * set cul!
